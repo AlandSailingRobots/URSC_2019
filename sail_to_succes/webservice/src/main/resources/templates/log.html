@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>TSTS</title>
+    <link rel="stylesheet" href="css/styles.css">
+  <head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a class="header_link" href="/"><img src="../static/images/STS.png" th:src="@{images/STS.png}" width="700" height="230"/></a>
+      </header>
+      <article class="main-log">
+        <h2>History</h2>
+        <section>
+          <ul class="log-list">
+            <li th:each="log, iter : ${logs}">
+              <p class="time">Time: <span th:text="${#temporals.format(times[iter.index], 'dd-MM-yyyy HH:mm:ss')}"></span>
+              <span style="font-size: 10px" th:text="${times[iter.index].getZone()}"></span></p>
+              <p>Heading: <span th:text="${log.compassHeading}"></span></p>
+              <p>Position: <span th:text="${#numbers.formatDecimal((log.latitude/10000000), 0, 7, 'POINT')}"></span>
+                <span th:text="${#numbers.formatDecimal((log.longitude/10000000), 0, 7, 'POINT')}"></span></p>
+            </li>
+          </ul>
+        </section>
+      </article>
+      <aside class="aside aside-1">
+        <h2>Search</h2>
+        <form action="#" th:action="@{/log}" th:object="${search}">
+          <p>Fr: <input name="from" type="datetime-local" step="1" /></p>
+          <p>To: <input name="to" type="datetime-local" step="1" /></p>
+          <button type="submit">Search</button>
+        </form>
+      </aside>
+      <aside class="aside aside-2">
+        <h2>Download Log File </h2>
+        <form action="#" th:action="@{/log/download/Log.csv}" th:object="${download}">
+          <p>Fr: <input name="from" type="datetime-local" step="1" /></p>
+          <p>To: <input name="to" type="datetime-local" step="1" /></p>
+          <button type="submit">Download Logs.csv</button>
+        </form>
+      </aside>
+    </div>
+  </body>
+</html>

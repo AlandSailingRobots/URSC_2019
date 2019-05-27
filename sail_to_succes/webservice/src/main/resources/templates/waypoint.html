@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Waypoints</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <a class="header_link" href="/"><img src="../static/images/STS.png" th:src="@{images/STS.png}" width="700" height="230"/></a>
+    </header>
+    <article class="main-log">
+        <h2>Waypoints</h2>
+        <section>
+            <ul class="waypoint-list">
+                <li class="waypoint-li" th:each="waypoint : ${waypoints}">
+                    <p>
+                        Latitude: <span th:text="${waypoint.latitude}"></span>
+                        Longitude: <span th:text="${waypoint.longitude}"></span>
+                        Radius: <span th:text="${waypoint.radius}"></span>
+                    </p>
+                </li>
+            </ul>
+            <p th:if="${#lists.isEmpty(waypoints)}">No waypoints.</p>
+        </section>
+    </article>
+    <aside class="aside aside-1">
+        <h2>Add waypoint</h2>
+        <form action="#" th:action="@{/addWaypointLastInList}">
+            <p>Lat: <input name="latitude" type="number" step="0.0000001" /></p>
+            <p>Lon: <input name="longitude" type="number" step="0.0000001" /></p>
+            <p>Rad: <input name="radius" type="number" /></p>
+            <button type="submit">Add</button>
+        </form>
+
+        <h2>Update waypoint</h2>
+        <form action="#" th:action="@{/updateWaypoint}">
+            <p>Pos: <input name="index" type="number" /></p>
+            <p>Act: <select class="select" name="action">
+                <option value="1">Latitude</option>
+                <option value="2">Longitude</option>
+                <option value="3">Radius</option>
+            </select></p>
+            <p>Val: <input name="value" type="number" step="0.0000001" /></p>
+            <button type="submit">Update</button>
+        </form>
+
+        <h2>Remove waypoint</h2>
+        <form action="#" th:action="@{/removeWaypoint}">
+            <p>Pos: <input name="index" type="number" /></p>
+            <button type="submit">Remove</button>
+        </form>
+
+        <h2>Clear waypoints</h2>
+        <form action="#" th:action="@{/clearWaypoints}">
+            <button type="submit">Clear</button>
+        </form>
+    </aside>
+    <aside class="aside aside-2">
+        <h2>Test calculations</h2>
+        <form class="test-form" action="#" th:action="@{/testCalculations}">
+            <p>Latitude: <input name="latitude" type="number" step="0.0000001" /></p>
+            <p>Longitude: <input name="longitude" type="number" step="0.0000001" /></p>
+            <p>Gps speed: <input name="gpsSpeed" type="number" step="0.0000001" /></p>
+            <p>Heading: <input name="heading" type="number" step="0.0000001" /></p>
+            <p>Wind Direction: <input name="windDirection" type="number" step="0.0000001" /></p>
+            <p>Wind Speed: <input name="windSpeed" type="number" step="0.0000001" /></p>
+            <button type="submit">Get next command</button>
+        </form>
+        <p>Command: <span th:text="${command.R}"></span>, <span th:text="${command.S}"></span></p>
+    </aside>
+</div>
+</body>
+</html>

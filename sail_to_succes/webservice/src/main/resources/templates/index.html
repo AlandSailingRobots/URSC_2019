@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>TSTS</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <head>
+  <body>
+    <script>
+      function updateValues() {
+        try {
+          updateWindDirection();
+          updateWindSpeed();
+          updateHeading();
+          updatePosition();
+          updateWaypoint();
+          updateDesired();
+        } catch (e) {
+          console.log(e);
+        }
+      }
+      function updateWindDirection() {
+        $.get("windDirection", function(windDirection) {
+          $("#windDirection").replaceWith(windDirection);
+        });
+      }
+      function updateWindSpeed() {
+        $.get("windSpeed", function(windSpeed) {
+          $("#windSpeed").replaceWith(windSpeed);
+        });
+      }
+      function updateHeading() {
+        $.get("heading", function(heading) {
+          $("#heading").replaceWith(heading);
+        });
+      }
+      function updatePosition() {
+        $.get("position", function(position) {
+          $("#position").replaceWith(position);
+        });
+      }
+      function updateWaypoint() {
+        $.get("wpos", function(wpos) {
+          $("#wpos").replaceWith(wpos);
+        });
+      }
+      function updateDesired() {
+        $.get("desired", function(desired) {
+          $("#desired").replaceWith(desired);
+        });
+      }
+
+      setInterval(updateValues, 1000);
+    </script>
+    <div class="wrapper">
+      <header>
+        <img src="../static/images/STS.png" th:src="@{images/STS.png}" width="700" height="230"/>
+      </header>
+      <article class="main">
+        <h2>Current data:</h2>
+        <p>Wind Direction: <span id="windDirection" th:text="${windDirection}"/><p/>
+        <p>Wind Speed: <span id="windSpeed" th:text="${windSpeed}"/><p/>
+        <p>Heading: <span id="heading" th:text="${heading}"/></p>
+        <p>Position: <span id="position" th:text="${position}"/></p>
+        <p>Current waypoint: <span id="wpos" th:text="${wpos}"/></p>
+        <p>Desired heading: <span id="desired" th:text="${desired}"/></p>
+      </article>
+    </div>
+    <footer class="footer">
+      <h2>Pages</h2>
+      <p><a href="log">Log</a></p>
+      <p><a href="waypoint">Waypoints</a></p>
+    </footer>
+  </body>
+</html>

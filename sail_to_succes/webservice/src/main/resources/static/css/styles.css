@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+}
+
+.header_link {
+  text-decoration: none;
+  color: black;
+}
+
+.wrapper {
+  margin-bottom: 5%;
+  display: flex;  
+  flex-flow: row wrap;
+  text-align: center;
+}
+
+.wrapper > * {
+  padding: 3px;
+  flex: 1 100%;
+}
+
+.main {
+  text-align: center;
+}
+
+.log-list {
+    list-style-type: none;
+    text-align: left;
+}
+
+.waypoint-list {
+  list-style-type: decimal;
+  text-align: center;
+  border-top: 1px solid black;
+}
+
+.waypoint-li {
+  border-bottom: 1px solid black;
+}
+
+.select {
+  width: 160px;
+}
+
+.test-form {
+  width: 75%;
+  text-align: right;
+}
+
+.time {
+    font-weight: bold;
+}
+
+.footer {
+  text-align: center;
+}
+
+/* Medium screens */
+@media all and (min-width: 600px) {
+  .aside { flex: 1 auto; }
+}
+
+/* Large screens */
+@media all and (min-width: 800px) {
+  .main { flex: 2 0px; }
+  .main-log { flex: 2 0px; }
+  .main { order: 0; }
+  .aside-1 { order: 1; }
+  .main-log { order: 2; }
+  .aside-2 { order: 3; }
+}
